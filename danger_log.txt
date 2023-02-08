@@ -9,3 +9,5 @@ Only can save one sharer in one ride, we changed the foreignkey to many-to-many.
 The share cannot show in the ride information, we did add ".all()" for a QuerySet.
 Docker shows that we did not install modules, we add the modules into the requirment file.
 Docker CSRF trust error, we add a config in setting.
+The driver can see ride without a sharer, as well as a ride which has the driver as the sharer. We found out that this was caused because Ride.exclude() was not really working for somehow. 
+To fix this issue, we used ~Q() in the Ride.objects.filter() and it worked as expected.
