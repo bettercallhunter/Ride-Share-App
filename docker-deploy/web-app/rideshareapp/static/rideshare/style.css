@@ -1,0 +1,112 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: block;
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+#smaindiv {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+#maindiv {
+  width: 85%;
+  margin: auto;
+  background: rgba(155, 155, 155, 0.9)
+}
+
+#infodiv {
+  width: 100%;
+  max-width: 500px;
+  padding: 15px;
+  margin: auto;
+}
+
+#pwc {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.msgdiv {
+  width: 100%;
+  max-width: 550px !important;
+  margin: auto;
+  display:block;
+}
+
+form {
+  display: block;
+}
+
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.input-width {
+  width: 100%;
+  max-width: 330px;
+}
+
+#username {
+  display: block;
+  width: 100%;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+#password {
+  margin-top: -1px;
+  display: block;
+  width: 100%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+#suemail {
+  margin-top: -1px;
+  display: block;
+  width: 100%;
+  border-radius: 0px;
+}
+
+#password1 {
+  margin-top: -1px;
+  display: block;
+  width: 100%;
+  border-radius: 0px;
+}
+
+#password2 {
+  margin-top: -1px;
+  display: block;
+  width: 100%;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
