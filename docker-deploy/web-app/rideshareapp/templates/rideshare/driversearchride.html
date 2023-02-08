@@ -71,9 +71,8 @@
             <div id="pwc" class="py-4 text-left container">
                 {% for ride in ride_list %}
                 {% if ride.creator != dname %}
-                {% if ride.type == vtype or ride.type == '--' %}
+                {% if ride.type == vtype %}
                 {% if ride.numberOfPassagers <= nop %} 
-                {% if ride.sharer != None %} 
                 {% if ride.speReq == sepReq or ride.speReq == '' %} <p>
                 
                     rider owner username: <b>{{ride.name}}</b><br>
@@ -97,7 +96,6 @@
                         <a href="confirm/{{ride.id}}">confirm ride</a>
                         <br>
                         <br>
-                        {% endif %}
                         {% endif %}
                         {% endif %}
                         {% endif %}

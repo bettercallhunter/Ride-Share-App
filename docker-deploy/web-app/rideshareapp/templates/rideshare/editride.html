@@ -77,8 +77,8 @@
                     <input type="text" id="name" name="name" value="{{name}}" required class="form-control">
                     <label for="type">type:</label>
                     <select id="type" name="type" class="form-control">
-                        <option selected value="--">--</option>
-                        <option value="suv">SUV</option>
+                        {% comment %} <option selected value="--">--</option> {% endcomment %}
+                        <option selected value="suv">SUV</option>
 			            <option value="sedan">Sedan</option>
 			            <option value="truck">Truck</option>
 			            <option value="van">Van</option>

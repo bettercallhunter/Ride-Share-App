@@ -4,7 +4,7 @@
 
 <head>
     <meta charset=" utf-8" />
-    <title>Profile</title>
+    <title>Ride Share</title>
     <link rel="icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
     <link rel="shortcut icon" href="{% static 'img/icon.png' %}" type="image/x-icon">
 
@@ -43,9 +43,9 @@
                     {% endif %}
                     <li><a href="{% url 'rideshare-rideowner' %}" class="nav-link px-2 text-secondary fs-4">Ride
                             Owner</a></li>
-                    <li><a href="{% url 'rideshare-ridesharer' %}" class="nav-link px-2 text-secondary fs-4">Ride
+                    <li><a href="{% url 'rideshare-ridesharer' %}" class="nav-link px-2 text-white fs-4">Ride
                             Sharer</a></li>
-                    <li><a href="{% url 'rideshare-profile' %}" class="nav-link px-2 text-white fs-4">Profile</a></li>
+                    <li><a href="{% url 'rideshare-profile' %}" class="nav-link px-2 text-secondary fs-4">Profile</a></li>
                     <li><a href="{% url 'rideshare-logout' %}" class="nav-link px-2 text-secondary fs-4">Log Out</a>
                     </li>
                 </ul>

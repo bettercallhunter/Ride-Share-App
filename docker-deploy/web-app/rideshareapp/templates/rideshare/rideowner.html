@@ -91,17 +91,19 @@
                         {% endif %}
                         {% if ride.share %}
                         {% if ride.sharer != none %}
-                        sharer: 
+                        sharer: <br>
                         {% for sharer in ride.sharer.all %}
                             {{sharer.name}}<br>
                         {% endfor %}
                         {% endif %}
                         {% endif %}
+                        {% if ride.status %}
                         {% if ride.driver == '' or ride.sharer == None %}
                             <a href="editride/{{ride.id}}">edit ride</a>&emsp;
                             <a href="deleteride/{{ride.id}}">delete ride</a>
                         {% elif ride.status %}
                             <a href="arrived/{{ride.id}}"> Arrival confirm</a>
+                        {% endif %}
                         {% endif %}
                     </p>
                     <br>

@@ -101,7 +101,7 @@ def rideowner(request):
 
         
     isdriver = Userinfo.objects.get(name=request.user.username).driverStatus
-    ride_list = Ride.objects.filter(creator=request.user.username,status=True)
+    ride_list = Ride.objects.filter(creator=request.user.username)
     # sharer_list = Ride.objects.select_related('sharer').all()
     
    
@@ -222,7 +222,7 @@ def ridedriver(request):
 def driversearchride(request):
     user= Userinfo.objects.filter(name=request.user.username)
     driver = Driver.objects.get(name=request.user.username)
-    ride_list = Ride.objects.filter(~Q(sharer =None),~Q(sharer__in=user),
+    ride_list = Ride.objects.filter(~Q(sharer__in=user),
         numberOfPassagers__lte=driver.numberOfPassagers, arrivalTime__gte=timezone.now(), driver='',status=True)
 
     re_list = {'ride_list': ride_list,
