@@ -11,6 +11,7 @@ import django.contrib.auth.password_validation as validators
 from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
 from django.utils import timezone
+from django.db.models import Q
 # Create your views here.
 
 
@@ -160,16 +161,17 @@ def confirm(request, id):
 @login_required
 def ridesharer(request):
     isdriver = Userinfo.objects.get(name=request.user.username).driverStatus
-    user = Userinfo.objects.get(name=request.user.username)
+    user = Userinfo.objects.filter(name=request.user.username)
     ride_list = Ride.objects.filter(
-        status=True, sharer=user).exclude(driver='')
+        status=True, sharer__in=user)
     return render(request, 'rideshare/ridesharer.html', {'ride_list': ride_list, 'isdriver': isdriver})
 
 @login_required
 def cancelridesharer(request, rideid):
     isdriver = Userinfo.objects.get(name=request.user.username).driverStatus
     ride = Ride.objects.get(id=rideid)
-    ride.sharer
+    user = Userinfo.objects.get(name=request.user.username)
+    ride.sharer.remove(user)
 
     send_mail(
         subject='Cancel Share',
@@ -186,7 +188,7 @@ def cancelridesharer(request, rideid):
         fail_silently=False
     )
 
-    return render(request, 'rideshare/ridesharer.html', {'isdriver': isdriver})
+    return redirect(ridesharer)
 
 
 @login_required
@@ -218,8 +220,9 @@ def ridedriver(request):
 
 @login_required
 def driversearchride(request):
+    user= Userinfo.objects.filter(name=request.user.username)
     driver = Driver.objects.get(name=request.user.username)
-    ride_list = Ride.objects.filter(
+    ride_list = Ride.objects.filter(~Q(sharer =None),~Q(sharer__in=user),
         numberOfPassagers__lte=driver.numberOfPassagers, arrivalTime__gte=timezone.now(), driver='',status=True)
 
     re_list = {'ride_list': ride_list,
@@ -398,14 +401,14 @@ def profile(request):
 def searchridesharer(request):
     isdriver = Userinfo.objects.get(name=request.user.username).driverStatus
 
-
+    user = Userinfo.objects.filter(name=request.user.username)
     if request.method == "POST":
         arrivaltime = request.POST['arrivalTime']
         address = request.POST['address']
         numberOfPassagers = request.POST['numberOfPassagers']
         spReq = request.POST['spReq']
         ride_list = Ride.objects.filter(
-            leftnop__gte=numberOfPassagers, address=address, sepReq=spReq, arrivalTime__gte=timezone.now(), arrivalTime__lte=arrivaltime,status =True)
+            leftnop__gte=numberOfPassagers, address=address, sepReq=spReq, arrivalTime__gte=timezone.now(), arrivalTime__lte=arrivaltime,status =True).exclude(sharer__in=user)
         return render(request, 'rideshare/shareshowride.html', {'ride_list': ride_list, 'snop': numberOfPassagers, 'spReq': spReq})
     return render(request, 'rideshare/sharersearchride.html', {'isdriver': isdriver})
 
@@ -417,10 +420,10 @@ def joinride(request, rideid):
     user = Userinfo.objects.get(name=request.user.username)
     ride.sharer.add(user)
     snop = request.GET['snop']
-    ride.leftnop += snop
+    ride.leftnop += int(snop)
     ride.save()
     
-    ShareRide.objects.create(riderid=rideid, name=request.user.username, nop=snop, creator=request.user.username)
+    ShareRide.objects.create(rideid=rideid, name=request.user.username, nop=snop, creator=request.user.username)
 
     mesC = request.user.username + ' joined into your ride.'
     mesS = 'You have joined into ' + ride.creator + '\'s ride.'
@@ -428,7 +431,7 @@ def joinride(request, rideid):
     messageS = ('You Join a Ride', mesS, settings.EMAIL_HOST_USER, [request.user.email])
     send_mass_mail((messageC, messageS), fail_silently=False)
 
-    return render(request, 'rideshare/ridesharer.html', {'isdriver': isdriver})
+    return redirect(ridesharer)
 
 
 @login_required

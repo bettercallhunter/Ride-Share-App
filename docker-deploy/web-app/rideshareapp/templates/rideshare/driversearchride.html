@@ -73,19 +73,31 @@
                 {% if ride.creator != dname %}
                 {% if ride.type == vtype or ride.type == '--' %}
                 {% if ride.numberOfPassagers <= nop %} 
+                {% if ride.sharer != None %} 
                 {% if ride.speReq == sepReq or ride.speReq == '' %} <p>
+                
                     rider owner username: <b>{{ride.name}}</b><br>
                     vehicle type: <b>{{ride.type}}</b><br>
                     destination: <b>{{ride.address}}</b><br>
                     number of passagers: <b>{{ride.numberOfPassagers}}</b><br>
                     arrival time: <b>{{ride.arrivalTime}}</b>
                     </p>
+                    {% if ride.sharer != none %}
+                            sharer: 
+                            {% for sharer in ride.sharer.all %}
+                                {{sharer.name}}<br>
+                            {% endfor %}
+                        {% endif %}
+                        <br>
                     {% if ride.sepReq != '' %}
+
+                
                     <li>special infomation: <b>{{ride.sepReq}}</b></p>
                         {% endif %}
                         <a href="confirm/{{ride.id}}">confirm ride</a>
                         <br>
                         <br>
+                        {% endif %}
                         {% endif %}
                         {% endif %}
                         {% endif %}

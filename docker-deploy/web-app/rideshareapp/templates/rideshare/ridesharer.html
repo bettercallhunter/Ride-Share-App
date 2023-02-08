@@ -76,7 +76,7 @@
                 <h4><a href="searchridesharer"> search for ride</a><br></h4>
                 <div id="pwc" class="py-4 text-center container">
                     {% for ride in ride_list %}
-                    {% if ride.share %}
+
                     <p>
                         Passenger name: <b>{{ride.name}}</b><br>
                         vehicle type require: <b>{{ride.type}}</b><br>
@@ -92,9 +92,10 @@
                         {% for sharer in ride.sharer.all %}
                             {{sharer.name}}<br>
                         {% endfor %}
+                        <a href="cancelridesharer/{{ride.id}}">cancel ride</a>
+
                         {% endif %}
                     </p>
-                    {% endif %}
                     {% endfor %}
                 </div>
                     

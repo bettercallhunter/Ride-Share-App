@@ -1,0 +1,11 @@
+Login and signup always shows form invalid, so we modified the form information.
+We met CSRF errors. One case is our form or models not match for our post information, the other case is when we modified forms or models we need to remigrate for database
+Sometimes we met the database cannot migrate, we need to drop all table we create and remigrate them, which can fix it.
+The overdue ride should not show for driver, we add a filter for timezone.
+The dirver can see the ride created by self, we add a condition to limit the ride search.
+User can see all page without login, we add the login requir for our pages.
+Cannot check whether the old password is the same as the new one, we get the old one and compare in the view file function.
+Only can save one sharer in one ride, we changed the foreignkey to many-to-many.
+The share cannot show in the ride information, we did add ".all()" for a QuerySet.
+Docker shows that we did not install modules, we add the modules into the requirment file.
+Docker CSRF trust error, we add a config in setting.

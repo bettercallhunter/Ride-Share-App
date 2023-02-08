@@ -33,7 +33,7 @@ class Ride(models.Model):
     shareNum = models.IntegerField()
     driver = models.CharField(max_length=20)
     creator = models.CharField(max_length=20)
-    sharer = models.ForeignKey(Userinfo, on_delete=models.CASCADE, null=True)
+    sharer = models.ManyToManyField(Userinfo, blank=True)
     sepReq = models.CharField(max_length=100)
     leftnop = models.IntegerField()
     
